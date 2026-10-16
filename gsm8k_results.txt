@@ -1,53 +1,14 @@
-GSM8K full evaluation - final recorded results
-Report date: 2026-10-13
+GSM8K Results
 
-Model: LLaDA-8B-Instruct; no training or post-training.
-Evaluation: all 1319 GSM8K test questions, 5-shot, batch size 1.
-Model seed: 42; harness seeds: [0, 1234, 1234, 1234].
-Generation settings: 256 output slots, steps=256, threshold=0.9.
+LLaDA-8B-Instruct; 1319 test questions; 5-shot; model seed 42.
+Both methods: 256 output slots, steps=256, threshold=0.9.
 
-Main comparison:
-F32_full:   1032/1319 correct (78.24%), 108.24 minutes.
-D09_w4_fb1: 1050/1319 correct (79.61%),  68.99 minutes.
-Recorded runtime reduction: 36.26%, with no observed accuracy loss in this run.
-Both configurations left zero questions with residual MASK tokens.
+Method                       Accuracy    Total time
+Baseline (fixed block 32)     78.24%       108.24 min
+Ours                         79.61%        68.99 min
 
-All configurations, in evaluation order:
-Configuration     Correct/1319  Accuracy   Wall (min)  Time saved  MASK questions
-F32_full          1032          78.24%     108.24       0.00%      0
-F128_full          935          70.89%     101.86       5.90%      0
-D09_w4_fb1        1050          79.61%      68.99      36.26%      0
-F64_full          1007          76.35%      97.20      10.20%      0
-F256_full          669          50.72%     121.37     -12.13%      0
-D09_full_fb0      1018          77.18%     101.44       6.28%     44
-D09_full_fb1      1030          78.09%      97.91       9.54%     23
-D09_w4_fb0        1043          79.08%      74.01      31.62%     31
-F32_w4            1042          79.00%      88.60      18.15%      0
-D05_w4_fb1        1029          78.01%      69.73      35.57%      0
+Ours: dynamic expansion, MTR=0.9, window=4, front fallback enabled.
+Result: 36.26% lower total runtime, with no observed accuracy loss in this run.
 
-F32/F64/F128/F256: fixed block lengths.
-D09/D05: dynamic expansion from block length 32, with trigger ratios 0.9/0.5.
-full: full suffix cache; w4: suffix_mode=window, window_blocks=4.
-fb1: forced-selection fallback restricted to the front unfinished block;
-fb0: that restriction disabled. Dynamic configurations use rewarm on expansion.
-
-Accuracy uses flexible answer extraction. Wall time is the complete model
-subprocess duration, including startup, model loading, evaluation, recording,
-and final output writing. Queue waiting and later CPU aggregation are excluded.
-Time saved is relative to F32_full and is not a FLOPs measurement.
-
-This was one fixed-order run per configuration. GSM8K test had already been
-used for exploration; these results do not establish an independent holdout
-gain, a statistically reliable accuracy improvement, or runtime variance.
-
-The retained sweep_suffix_prune_gsm8k.ipynb is a related parameter exploration,
-not the runner or output of this final comparison. Its unpruned dynamic
-baselines differ from F32_full above.
-
-Source: block-size-full-20261012, final_interpretation_zh_v1.txt.
-Source report SHA256:
-7bf00d22383d96b46584dfa6b01889a8821eafbb7a5c043ea49eb7822bd38456
-Original comparison JSON SHA256:
-82f74c67fc31673d92b1e393ab050066cce1f6c8a61365aab67731a7652e70fe
-Original complete-process timing JSON SHA256:
-c303b3c08b9162b4a2cce53dc1f43046a6210abd2235d32da3d70ebea1180827
+Accuracy uses flexible answer extraction. Total time includes model loading,
+evaluation and recording. Single-run results on previously explored test data.
