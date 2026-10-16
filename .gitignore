@@ -7,3 +7,7 @@ llada/evals_results/
 dream/evals_results/
 .DS_Store
 **/.DS_Store
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+llada/nlogs/
+eval_results/
