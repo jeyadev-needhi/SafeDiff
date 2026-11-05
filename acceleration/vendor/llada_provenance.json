@@ -1,0 +1,40 @@
+{
+  "schema": "safediff.llada_source.v1",
+  "repository": "https://github.com/ML-GSAI/LLaDA",
+  "commit": "f51cb1731f5a40ba35c15e51b6b66b147e689f24",
+  "commit_date_utc": "2025-06-02T11:11:17Z",
+  "selection_reason": "Original LLaDA generator before the later iLLaDA and end-of-thinking extensions; this exact snapshot includes an MIT license.",
+  "license": "MIT",
+  "license_file": "LICENSE.LLaDA",
+  "copyright": "Copyright (c) 2025 NieShenRuc",
+  "files": {
+    "llada.py": {
+      "upstream_path": "generate.py",
+      "url": "https://github.com/ML-GSAI/LLaDA/blob/f51cb1731f5a40ba35c15e51b6b66b147e689f24/generate.py",
+      "git_blob_sha": "c2cef3b228ccee9f55da341cc6e2e89913677fc7",
+      "sha256": "9d7e2dbcbc112260003bde90905e8d5cf10afc9e960aa2be9b8f2b353aa1744c",
+      "bytes": 5423,
+      "changes": []
+    },
+    "LICENSE.LLaDA": {
+      "upstream_path": "LICENSE",
+      "url": "https://github.com/ML-GSAI/LLaDA/blob/f51cb1731f5a40ba35c15e51b6b66b147e689f24/LICENSE",
+      "git_blob_sha": "f6802a560469a292d6be29ee29c6dea9829badac",
+      "sha256": "e9788c9979170966f3b37fbcf64057e7d2aa3fb65e4921aa35a0717ce3319b6c",
+      "bytes": 1067,
+      "changes": []
+    }
+  },
+  "integration_contract": {
+    "batch_size": 1,
+    "steps": "gen_length",
+    "block_length": "gen_length",
+    "temperature": 0.0,
+    "cfg_scale": 0.0,
+    "remasking": "low_confidence",
+    "mask_id": 126336,
+    "cache": "The calling adapter must force use_cache=False for every model forward; no past_key_values are supplied or reused.",
+    "stopping": "Fixed steps, no early EOS stop; retain and report any residual MASK.",
+    "model_compatibility": "The generator uses model.device and model(...).logits. Execution uses the shared extended model; pretrained-checkpoint parity with the original LLaDA model remains untested."
+  }
+}

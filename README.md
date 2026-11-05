@@ -4,6 +4,32 @@
 
 SafeDiff is a research prototype investigating whether the internal denoising trajectory of Diffusion Language Models (dLLMs) can provide a lightweight, training-free signal for safety detection.
 
+### Acceleration backends
+
+The standalone generation API provides three fixed LLaDA-8B-Instruct policies:
+
+| Policy | Mode | Generation path |
+|---|---|---|
+| `FAST` | `instant` | Contiguous ALL8 acceleration |
+| `NORMAL` | `fastdllm` | Pinned official Fast-dLLM v1 dual-cache decoder |
+| `SAFE` | `llada` | Pinned original LLaDA decoder, full generation canvas, one step per output token, no cache |
+
+All three use a shared extended model and return responses, exact configurations,
+observed model-call counts, timing, and source provenance. The policy adapter
+resolves the caller's selected policy to a decoder; risk estimation and policy
+selection are handled by the controller.
+
+See [the acceleration guide](docs/acceleration.md) for the Python API, paired
+input runner, dependency setup, and measurement definitions. Inspect the presets
+without loading a model:
+
+```bash
+python -m analysis.run_acceleration --mode compare-all --describe-config
+python -m analysis.run_acceleration --policy SAFE --describe-config
+```
+
+`compare` runs the two acceleration modes.
+
 ### Research Question
 
 Can safety-relevant information in the diffusion/denoising process be used during inference while preserving the efficiency benefits of fast dLLM inference?
@@ -17,7 +43,7 @@ The prototype currently includes:
 - Hidden-state comparison between refined and control inputs
 - Hidden-state measurements over different tail lengths
 - Exploratory safety classification
-- Initial investigation of Fast-dLLM cache-based acceleration
+- Two acceleration decoders and an unaccelerated LLaDA baseline with an explicit policy adapter
 
 ### Preliminary Experiment
 
@@ -35,7 +61,7 @@ Hidden-state tail sizes of 32, 64, 128, and 256 tokens were investigated.
 | 128 | **0.61** |
 | 256 | 0.32 |
 
-The 128-token condition currently gives the strongest exploratory separation.
+The 128-token condition had the highest AUC among these four settings.
 
 An exploratory threshold selected on the same 20 samples produced:
 
@@ -43,7 +69,7 @@ An exploratory threshold selected on the same 20 samples produced:
 - Specificity: 0.90
 - Accuracy: 0.75
 
-These values are preliminary and are **not independent validation results**, because the threshold was selected using the same samples.
+Threshold selection and evaluation used the same 20 samples.
 
 ### Intended Contribution
 
@@ -59,7 +85,10 @@ The next stage is to determine whether safety detection can be retained while re
 
 ```text
 models/          LLaDA/JailbreakBench model integration
+acceleration/    Fixed generation modes and policy adapter
 refine_prompt/   Adversarial prompt refinement
 analysis/        Experimental and analysis code
 results/         Selected experimental results
 datasets/        Experimental input data
+docs/            API guidance
+```
