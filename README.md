@@ -4,6 +4,39 @@
 
 SafeDiff is a research prototype investigating whether the internal denoising trajectory of Diffusion Language Models (dLLMs) can provide a lightweight, training-free signal for safety detection.
 
+### Acceleration backends
+
+Choose one of two plans, then select a FAST, NORMAL or SAFE policy:
+
+| Policy | Plan A (default): switch generation strategy | Plan B: vary Fast-dLLM threshold |
+|---|---|---|
+| `FAST` | Contiguous ALL8, threshold 0.9 | Dual-cache, threshold 0.7 |
+| `NORMAL` | Fast-dLLM dual-cache, threshold 0.9 | Dual-cache, threshold 0.8 |
+| `SAFE` | Original LLaDA decoder, full generation canvas, one step per output token, no cache | Dual-cache, threshold 0.9 |
+
+All policies use a shared extended model and return responses, exact configurations,
+observed model-call counts, timing, and source provenance. The standalone API
+and CLI resolve the plan and policy supplied by the caller. SafeDiff's existing
+routing scripts remain separate, and any future controller integration needs
+to pass its policy explicitly. SAFE names a configuration whose safety needs
+separate evaluation.
+
+See [the acceleration guide](docs/acceleration.md) for the Python API, paired
+input runner, dependency setup, and measurement definitions. Inspect the presets
+without loading a model:
+
+```bash
+python -m analysis.run_acceleration --mode compare-all --describe-config
+python -m analysis.run_acceleration --policy SAFE --describe-config
+python -m analysis.run_acceleration --plan B --policy NORMAL --describe-config
+```
+
+Use `--plan` with `--policy`. The direct `--mode` interface is unchanged.
+`compare` runs ALL8 and Fast-dLLM dual-cache at threshold 0.9. Use the policy
+interface to test the three Plan B thresholds. See the
+[historical results](docs/benchmarks/plan-options-2026-11-10.md) for the
+benchmark scope and observed tradeoffs.
+
 ### Research Question
 
 Can safety-relevant information in the diffusion/denoising process be used during inference while preserving the efficiency benefits of fast dLLM inference?
@@ -17,7 +50,7 @@ The prototype currently includes:
 - Hidden-state comparison between refined and control inputs
 - Hidden-state measurements over different tail lengths
 - Exploratory safety classification
-- Initial investigation of Fast-dLLM cache-based acceleration
+- Two acceleration decoders and an unaccelerated LLaDA baseline with an explicit policy adapter
 
 ### Preliminary Experiment
 
@@ -35,7 +68,7 @@ Hidden-state tail sizes of 32, 64, 128, and 256 tokens were investigated.
 | 128 | **0.61** |
 | 256 | 0.32 |
 
-The 128-token condition currently gives the strongest exploratory separation.
+The 128-token condition had the highest AUC among these four settings.
 
 An exploratory threshold selected on the same 20 samples produced:
 
@@ -43,7 +76,7 @@ An exploratory threshold selected on the same 20 samples produced:
 - Specificity: 0.90
 - Accuracy: 0.75
 
-These values are preliminary and are **not independent validation results**, because the threshold was selected using the same samples.
+Threshold selection and evaluation used the same 20 samples.
 
 ### Intended Contribution
 
@@ -59,7 +92,10 @@ The next stage is to determine whether safety detection can be retained while re
 
 ```text
 models/          LLaDA/JailbreakBench model integration
+acceleration/    Fixed generation modes and policy adapter
 refine_prompt/   Adversarial prompt refinement
 analysis/        Experimental and analysis code
 results/         Selected experimental results
 datasets/        Experimental input data
+docs/            API guidance
+```

@@ -1,0 +1,62 @@
+{
+  "schema": "safediff_acceleration_sources_v1",
+  "upstream_repository": "https://github.com/NVlabs/Fast-dLLM",
+  "upstream_commit": "a9b81e4caa240c8cad4f7dc1889ff4852a0fca5b",
+  "upstream_generate_path": "v1/llada/generate.py",
+  "upstream_model_path": "v1/llada/model/modeling_llada.py",
+  "instant_source_record": "2026-10-28/threshold-parallel-sweep60/source/generic_k.py",
+  "native_source_record": "2026-11-01/fastdllm-baseline-full24/source",
+  "shared_model_source_record": "2026-10-28/threshold-parallel-sweep60/source/model",
+  "license": "Apache-2.0 for upstream-derived files; original headers and vendor/LICENSE retained",
+  "adaptations": [
+    "Upstream generate.py model import changed to package-relative import only; decoder bodies unchanged.",
+    "Both modes use the frozen shared model with optional explicit-position attention/RoPE arguments.",
+    "The native fastdllm decoder passes no position_ids; its ordinary model path is preserved.",
+    "Instant generator copied byte-for-byte; configuration preset and common measurement wrapper are separate."
+  ],
+  "equivalence_scope": "Source inspection confirms unchanged native decoder bodies and ordinary model branch. GPU token/NFE equivalence is a separate required acceptance check; this manifest does not claim it has run.",
+  "original_files": {
+    "instant.py": {
+      "sha256": "98d9a5b6ab328dd92fe4fce699a19cabf722ea98be88056212651f17ffe954bd",
+      "bytes": 19814
+    },
+    "shared_model.py": {
+      "sha256": "252d3e80544fab60003094ea2df09e712633eea897bbd5354d3d1461d1e380ee",
+      "bytes": 72914
+    },
+    "configuration_llada.py": {
+      "sha256": "57a4a1f38ca82732b5aaebc9df55b9cf7f3b9e9cea3c48cd7ab16a4083824da1",
+      "bytes": 13320
+    },
+    "upstream_generate.py": {
+      "sha256": "aed9a53c61e9ad49c30c45c32da898241845417bd43c12b88c66972e7acbd96a",
+      "bytes": 19624
+    },
+    "upstream_model.py": {
+      "sha256": "c60ed78a8f044c885f49c1ba0685b3cbb9c697232b4da85844c4a9cebc426459",
+      "bytes": 69012
+    }
+  },
+  "packaged_files": {
+    "instant.py": {
+      "sha256": "98d9a5b6ab328dd92fe4fce699a19cabf722ea98be88056212651f17ffe954bd",
+      "bytes": 19814
+    },
+    "fastdllm.py": {
+      "sha256": "cafe176a86e8273eabffdfca13ac275e7b36b3393790e6d92e64a5593c80105b",
+      "bytes": 19698
+    },
+    "model/modeling_llada.py": {
+      "sha256": "252d3e80544fab60003094ea2df09e712633eea897bbd5354d3d1461d1e380ee",
+      "bytes": 72914
+    },
+    "model/configuration_llada.py": {
+      "sha256": "57a4a1f38ca82732b5aaebc9df55b9cf7f3b9e9cea3c48cd7ab16a4083824da1",
+      "bytes": 13320
+    },
+    "LICENSE": {
+      "sha256": "62f1aefe5a00ddc91541b3ddc7922f0508f10911431bebffa6b98c434b07c0b3",
+      "bytes": 11335
+    }
+  }
+}

@@ -226,23 +226,22 @@ def generate(
     use_hidden_detection = (sp_mode == "hidden") and (baseline_hidden is not None)
     warned_no_hidden = False
 
+    prompt_length = prompt.shape[1]
     for num_block in range(num_blocks):
         if fill_all_masks:
-            block_start, block_end = 0, x.shape[1]                    # <<<<<< cover the entire sequence
+            block_start, block_end = 0, x.shape[1]
         else:
-            block_start = prompt.shape[1] + num_block * block_length  # cover only the tail generation area
-            block_end   = prompt.shape[1] + (num_block + 1) * block_length
-
-        # Safety guard: if the block does not cover any mask, expand to the first/last mask to avoid missing fills
-        global_mask_pos = (x == mask_id).nonzero(as_tuple=False)
-        if global_mask_pos.numel() > 0:
-            first = int(global_mask_pos[:, 1].min().item())
-            last  = int(global_mask_pos[:, 1].max().item()) + 1
-            block_start = min(block_start, first)
-            block_end   = max(block_end,   last)
+            block_start = prompt_length + num_block * block_length
+            block_end = min(block_start + block_length, x.shape[1])
+            if num_block == 0:
+                # Include existing inline prompt masks without touching future output blocks.
+                inline_positions = (x[:, :prompt_length] == mask_id).nonzero(as_tuple=True)[1]
+                if inline_positions.numel() > 0:
+                    block_start = int(inline_positions.min().item())
 
         block_mask_index = (x[:, block_start:block_end] == mask_id)
         num_transfer_tokens = get_num_transfer_tokens(block_mask_index, steps_per_block)
+        logits = None
 
         for i in range(steps_per_block):
             if i == injection_step:
@@ -259,6 +258,15 @@ def generate(
                         ).unsqueeze(0)
 
             mask_index = (x == mask_id)
+            eligible = mask_index[:, block_start:block_end]
+            if protected_index is not None:
+                eligible = eligible & ~protected_index[:, block_start:block_end]
+            transfer_counts = torch.minimum(num_transfer_tokens[:, i], eligible.sum(dim=1)).tolist()
+            if not any(transfer_counts):
+                # Keep honoring a configured injection even if decoding has already finished.
+                if injection_step is not None and i < injection_step < steps_per_block:
+                    continue
+                break
 
             if cfg_scale > 0.0:
                 un_x = x.clone()
@@ -330,8 +338,7 @@ def generate(
             confidence = torch.where(mask_index, conf, -np.inf)
 
             transfer_index = torch.zeros_like(x, dtype=torch.bool, device=x.device)
-            for j in range(confidence.shape[0]):
-                k = int(num_transfer_tokens[j, i].item())
+            for j, k in enumerate(transfer_counts):
                 if k <= 0:
                     continue
                 _, select_index = torch.topk(confidence[j], k=k)
@@ -341,7 +348,7 @@ def generate(
         unsafe_flag = False
         detection_score = 0.0
 
-        if sp_mode != "off":
+        if sp_mode != "off" and logits is not None:
             positions_mask = torch.zeros_like(x[:, :], dtype=torch.bool, device=x.device)
             positions_mask[:, block_start:block_end] = True
             sp_logit = safety_perplexity_from_logits(logits, positions_mask, accept_ids, refuse_ids)

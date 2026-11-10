@@ -1,0 +1,4 @@
+# Install/retain a CUDA-compatible PyTorch build separately for the GPU host.
+# This is the decoder-only environment, not requirements_no_av.txt.
+transformers==4.49.0
+numpy
