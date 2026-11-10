@@ -1,0 +1,26 @@
+[
+  {
+    "threshold": 0.8,
+    "total_time_sec": 18.403022029437125,
+    "average_time_sec": 2.3003777536796406,
+    "average_nfe": 45.0
+  },
+  {
+    "threshold": 0.85,
+    "total_time_sec": 17.416477640159428,
+    "average_time_sec": 2.1770597050199285,
+    "average_nfe": 47.125
+  },
+  {
+    "threshold": 0.9,
+    "total_time_sec": 18.45858563762158,
+    "average_time_sec": 2.3073232047026977,
+    "average_nfe": 50.125
+  },
+  {
+    "threshold": 0.95,
+    "total_time_sec": 20.068779385648668,
+    "average_time_sec": 2.5085974232060835,
+    "average_nfe": 53.625
+  }
+]

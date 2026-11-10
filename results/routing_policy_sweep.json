@@ -1,0 +1,72 @@
+[
+  {
+    "fast_threshold": 0.1,
+    "safe_threshold": 0.3,
+    "fast_pct": 27.47826086956522,
+    "normal_pct": 25.623188405797105,
+    "safe_pct": 46.89855072463768,
+    "harmful_fast_pct": 6.10079575596817,
+    "harmful_normal_pct": 12.3342175066313,
+    "harmful_safe_pct": 81.56498673740053
+  },
+  {
+    "fast_threshold": 0.15,
+    "safe_threshold": 0.35,
+    "fast_pct": 36.46376811594203,
+    "normal_pct": 19.536231884057973,
+    "safe_pct": 44.0,
+    "harmful_fast_pct": 9.416445623342176,
+    "harmful_normal_pct": 11.007957559681698,
+    "harmful_safe_pct": 79.57559681697613
+  },
+  {
+    "fast_threshold": 0.2,
+    "safe_threshold": 0.4,
+    "fast_pct": 43.826086956521735,
+    "normal_pct": 14.666666666666666,
+    "safe_pct": 41.507246376811594,
+    "harmful_fast_pct": 13.395225464190982,
+    "harmful_normal_pct": 9.018567639257293,
+    "harmful_safe_pct": 77.58620689655173
+  },
+  {
+    "fast_threshold": 0.25,
+    "safe_threshold": 0.45,
+    "fast_pct": 49.15942028985507,
+    "normal_pct": 12.231884057971014,
+    "safe_pct": 38.608695652173914,
+    "harmful_fast_pct": 16.843501326259947,
+    "harmful_normal_pct": 8.620689655172415,
+    "harmful_safe_pct": 74.53580901856765
+  },
+  {
+    "fast_threshold": 0.3,
+    "safe_threshold": 0.5,
+    "fast_pct": 53.10144927536232,
+    "normal_pct": 10.318840579710145,
+    "safe_pct": 36.57971014492753,
+    "harmful_fast_pct": 18.43501326259947,
+    "harmful_normal_pct": 9.946949602122016,
+    "harmful_safe_pct": 71.61803713527851
+  },
+  {
+    "fast_threshold": 0.35,
+    "safe_threshold": 0.55,
+    "fast_pct": 56.00000000000001,
+    "normal_pct": 9.971014492753623,
+    "safe_pct": 34.028985507246375,
+    "harmful_fast_pct": 20.424403183023873,
+    "harmful_normal_pct": 11.405835543766578,
+    "harmful_safe_pct": 68.16976127320955
+  },
+  {
+    "fast_threshold": 0.4,
+    "safe_threshold": 0.6,
+    "fast_pct": 58.492753623188406,
+    "normal_pct": 9.333333333333334,
+    "safe_pct": 32.17391304347826,
+    "harmful_fast_pct": 22.413793103448278,
+    "harmful_normal_pct": 11.803713527851459,
+    "harmful_safe_pct": 65.78249336870027
+  }
+]

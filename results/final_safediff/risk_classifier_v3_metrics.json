@@ -1,0 +1,28 @@
+{
+  "train_examples": 86759,
+  "train_harmful": 46216,
+  "train_unharmful": 40543,
+  "test_examples": 1725,
+  "test_harmful": 754,
+  "test_unharmful": 971,
+  "accuracy": 0.8098550724637681,
+  "precision": 0.7547846889952153,
+  "recall": 0.8368700265251989,
+  "f1": 0.7937106918238994,
+  "roc_auc": 0.8944155031729164,
+  "confusion_matrix": [
+    [
+      766,
+      205
+    ],
+    [
+      123,
+      631
+    ]
+  ],
+  "feature_count": 120000,
+  "feature_time_sec": 235.18755830731243,
+  "train_time_sec": 77.00684260576963,
+  "test_total_time_sec": 0.003950294107198715,
+  "test_ms_per_prompt": 0.0022900255693905597
+}

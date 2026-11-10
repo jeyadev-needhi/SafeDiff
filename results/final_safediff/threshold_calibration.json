@@ -1,0 +1,225 @@
+{
+  "distribution": {
+    "0": 0.002229828002323091,
+    "10": 0.06820745829816867,
+    "25": 0.16975441845859288,
+    "50": 0.471934017172314,
+    "75": 0.8851575761358811,
+    "90": 0.9783948055252987,
+    "95": 0.9926950697290611,
+    "99": 0.9991900475170272,
+    "100": 0.9999054483423038
+  },
+  "thresholds": [
+    {
+      "threshold": 0.05,
+      "precision": 0.4643078833022967,
+      "recall": 0.9920424403183024,
+      "f1": 0.6325581395348837,
+      "false_positives": 863,
+      "false_negatives": 6,
+      "true_positives": 748,
+      "true_negatives": 108
+    },
+    {
+      "threshold": 0.1,
+      "precision": 0.5085910652920962,
+      "recall": 0.9814323607427056,
+      "f1": 0.6699864191942055,
+      "false_positives": 715,
+      "false_negatives": 14,
+      "true_positives": 740,
+      "true_negatives": 256
+    },
+    {
+      "threshold": 0.15000000000000002,
+      "precision": 0.5487528344671202,
+      "recall": 0.9628647214854111,
+      "f1": 0.6990852190659606,
+      "false_positives": 597,
+      "false_negatives": 28,
+      "true_positives": 726,
+      "true_negatives": 374
+    },
+    {
+      "threshold": 0.2,
+      "precision": 0.573268921095008,
+      "recall": 0.9442970822281167,
+      "f1": 0.7134268537074149,
+      "false_positives": 530,
+      "false_negatives": 42,
+      "true_positives": 712,
+      "true_negatives": 441
+    },
+    {
+      "threshold": 0.25,
+      "precision": 0.6072980017376195,
+      "recall": 0.9270557029177718,
+      "f1": 0.7338582677165354,
+      "false_positives": 452,
+      "false_negatives": 55,
+      "true_positives": 699,
+      "true_negatives": 519
+    },
+    {
+      "threshold": 0.3,
+      "precision": 0.6308973172987974,
+      "recall": 0.9045092838196287,
+      "f1": 0.7433242506811989,
+      "false_positives": 399,
+      "false_negatives": 72,
+      "true_positives": 682,
+      "true_negatives": 572
+    },
+    {
+      "threshold": 0.35000000000000003,
+      "precision": 0.6623762376237624,
+      "recall": 0.8872679045092838,
+      "f1": 0.7585034013605442,
+      "false_positives": 341,
+      "false_negatives": 85,
+      "true_positives": 669,
+      "true_negatives": 630
+    },
+    {
+      "threshold": 0.4,
+      "precision": 0.6961093585699264,
+      "recall": 0.8779840848806366,
+      "f1": 0.7765395894428152,
+      "false_positives": 289,
+      "false_negatives": 92,
+      "true_positives": 662,
+      "true_negatives": 682
+    },
+    {
+      "threshold": 0.45,
+      "precision": 0.7242152466367713,
+      "recall": 0.8567639257294429,
+      "f1": 0.7849331713244229,
+      "false_positives": 246,
+      "false_negatives": 108,
+      "true_positives": 646,
+      "true_negatives": 725
+    },
+    {
+      "threshold": 0.5,
+      "precision": 0.7547846889952153,
+      "recall": 0.8368700265251989,
+      "f1": 0.7937106918238994,
+      "false_positives": 205,
+      "false_negatives": 123,
+      "true_positives": 631,
+      "true_negatives": 766
+    },
+    {
+      "threshold": 0.55,
+      "precision": 0.779467680608365,
+      "recall": 0.8156498673740054,
+      "f1": 0.7971484121840571,
+      "false_positives": 174,
+      "false_negatives": 139,
+      "true_positives": 615,
+      "true_negatives": 797
+    },
+    {
+      "threshold": 0.6000000000000001,
+      "precision": 0.8083670715249662,
+      "recall": 0.7944297082228117,
+      "f1": 0.8013377926421404,
+      "false_positives": 142,
+      "false_negatives": 155,
+      "true_positives": 599,
+      "true_negatives": 829
+    },
+    {
+      "threshold": 0.6500000000000001,
+      "precision": 0.8335724533715926,
+      "recall": 0.7705570291777188,
+      "f1": 0.8008270158511371,
+      "false_positives": 116,
+      "false_negatives": 173,
+      "true_positives": 581,
+      "true_negatives": 855
+    },
+    {
+      "threshold": 0.7000000000000001,
+      "precision": 0.865625,
+      "recall": 0.7347480106100795,
+      "f1": 0.7948350071736011,
+      "false_positives": 86,
+      "false_negatives": 200,
+      "true_positives": 554,
+      "true_negatives": 885
+    },
+    {
+      "threshold": 0.7500000000000001,
+      "precision": 0.8926174496644296,
+      "recall": 0.7055702917771883,
+      "f1": 0.7881481481481482,
+      "false_positives": 64,
+      "false_negatives": 222,
+      "true_positives": 532,
+      "true_negatives": 907
+    },
+    {
+      "threshold": 0.8,
+      "precision": 0.9119266055045872,
+      "recall": 0.6591511936339522,
+      "f1": 0.7652040030792918,
+      "false_positives": 48,
+      "false_negatives": 257,
+      "true_positives": 497,
+      "true_negatives": 923
+    },
+    {
+      "threshold": 0.8500000000000001,
+      "precision": 0.9237113402061856,
+      "recall": 0.5941644562334217,
+      "f1": 0.7231638418079096,
+      "false_positives": 37,
+      "false_negatives": 306,
+      "true_positives": 448,
+      "true_negatives": 934
+    },
+    {
+      "threshold": 0.9000000000000001,
+      "precision": 0.9477611940298507,
+      "recall": 0.5053050397877984,
+      "f1": 0.6591695501730104,
+      "false_positives": 21,
+      "false_negatives": 373,
+      "true_positives": 381,
+      "true_negatives": 950
+    },
+    {
+      "threshold": 0.9500000000000001,
+      "precision": 0.9788732394366197,
+      "recall": 0.3687002652519894,
+      "f1": 0.535645472061657,
+      "false_positives": 6,
+      "false_negatives": 476,
+      "true_positives": 278,
+      "true_negatives": 965
+    }
+  ],
+  "best_f1": {
+    "threshold": 0.6000000000000001,
+    "precision": 0.8083670715249662,
+    "recall": 0.7944297082228117,
+    "f1": 0.8013377926421404,
+    "false_positives": 142,
+    "false_negatives": 155,
+    "true_positives": 599,
+    "true_negatives": 829
+  },
+  "best_recall_precision_080": {
+    "threshold": 0.6000000000000001,
+    "precision": 0.8083670715249662,
+    "recall": 0.7944297082228117,
+    "f1": 0.8013377926421404,
+    "false_positives": 142,
+    "false_negatives": 155,
+    "true_positives": 599,
+    "true_negatives": 829
+  }
+}
